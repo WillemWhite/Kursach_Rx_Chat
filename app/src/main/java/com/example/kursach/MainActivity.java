@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
             String name = ((Room)i.getParcelableExtra("room")).getRoomName();
             Toast.makeText(this,"Вы вошли в комнату " + name, Toast.LENGTH_LONG).show();
         }
-        ChatModel chatModel = ((ChatApplication) getApplication()).getChatModel();
-        chatModel.onCreate();
-        chatModel.connect();
+
+        ChatApplication chatApplication = (ChatApplication) getApplication();
+        chatApplication.onCreate();
+        ChatModel chatModel = chatApplication.getChatModel();
 
         chatViewModel = new ChatViewModel(chatModel.getChatMessages());
         chatViewModel.subscribe();

@@ -1,5 +1,7 @@
 package com.example.kursach;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.util.Log;
 
 import com.github.nkzawa.emitter.Emitter;
@@ -94,6 +96,7 @@ public class ChatModel {
         return socket;
     }
 
+    @SuppressLint("CheckResult")
     public void loadOldMessages() {
         chatMessageApi.messages()
                 .subscribeOn(Schedulers.io())

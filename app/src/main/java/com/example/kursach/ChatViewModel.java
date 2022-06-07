@@ -22,7 +22,7 @@ public class ChatViewModel {
         subscriptions.add(chatMessageObservable
                 .map(list -> {
                     List<ChatMessage> sortedList = new ArrayList<>(list);
-                    Collections.sort(sortedList, this::chatMessageComparator);
+                    sortedList.sort(this::chatMessageComparator);
                     return sortedList;
                 })
                 .flatMap(list ->
