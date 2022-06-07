@@ -19,6 +19,6 @@ public class ChatStore {
     }
 
     public Observable<Collection<ChatMessage>> getStream() {
-        return subject.hide();
+        return subject;
     }
 }
