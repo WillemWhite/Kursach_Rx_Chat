@@ -14,7 +14,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
 
     private ChatViewModel chatViewModel;
     private final CompositeDisposable viewSubscriptions = new CompositeDisposable();
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         chatViewModel = new ChatViewModel(chatModel.getChatMessages());
         chatViewModel.subscribe();
 
-        ListView listView = (ListView) findViewById(R.id.list_view);
+        ListView listView = findViewById(R.id.list_view);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         listView.setAdapter(arrayAdapter);
 
@@ -48,12 +47,10 @@ public class MainActivity extends AppCompatActivity {
                     arrayAdapter.addAll(list);
                 }));
 
-        EditText editText = (EditText) findViewById(R.id.edit_text);
+        EditText editText = findViewById(R.id.edit_text);
         findViewById(R.id.send_button)
-                .setOnClickListener(event -> {
-                    chatModel.sendMessage(editText.getText().toString());
-
-                });
+                .setOnClickListener(event ->
+                    chatModel.sendMessage(editText.getText().toString()));
     }
 
     @Override

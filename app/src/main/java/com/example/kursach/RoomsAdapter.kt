@@ -3,7 +3,7 @@ package com.example.kursach
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class RoomsAdapter (var listener: OnItemClickInterface)
+class RoomsAdapter (private var listener: OnItemClickInterface)
         : RecyclerView.Adapter<RoomsViewHolder>() {
         var data : List<Room> = emptyList()
             set(value) {

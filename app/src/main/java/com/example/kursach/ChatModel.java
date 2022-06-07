@@ -42,7 +42,7 @@ public class ChatModel {
         // Create WebSocket
         socket = createSocket();
         socket.on("connect", args ->
-                Log.d(TAG, "Socket connected"));
+                Log.d(TAG, "Socket created"));
         subscriptions.add(
                 createListener(socket)
                         .map(json -> gson.fromJson(json, ChatMessage.class))
@@ -79,6 +79,7 @@ public class ChatModel {
         return Observable.create(subscriber -> {
             Emitter.Listener listener = args -> subscriber.onNext((String) args[0]);
             socket.on("chat message", listener);
+            // cleanup code
             subscriber.setDisposable(Disposables.fromAction(
                     () -> socket.off("chat message", listener)
             ));
@@ -103,7 +104,7 @@ public class ChatModel {
                 .subscribe(messages -> {
                     for (String messageJson : messages) {
                         ChatMessage chatMessage = gson.fromJson(messageJson, ChatMessage.class);
-                        chatStore.put(new ChatMessage(chatMessage).setIsPending(false));
+                        chatStore.put(chatMessage.setIsPending(false));
                     }
                 });
     }
